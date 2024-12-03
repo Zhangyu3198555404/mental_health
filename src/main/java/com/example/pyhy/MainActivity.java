@@ -1,11 +1,15 @@
 package com.example.pyhy;
 
+import com.example.pyhy.Login.User_Main;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,14 +17,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.Stack;
-
 public class MainActivity extends AppCompatActivity {
 
     private RelativeLayout relativeLayout;
     private EditText usernameEditText, passwordEditText;
     private Button loginButton, registerButton;
     private TextView registerTextView;
+    User user = new User(); // 本地临时保存注册信息
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         registerTextView = findViewById(R.id.registerTextView);
 
+        // 检查 SharedPreferences 中是否已登录
+        checkLoginStatus();
+
         // 设置登录按钮点击事件
         loginButton.setOnClickListener(v -> {
             String username = usernameEditText.getText().toString().trim();
@@ -58,12 +64,41 @@ public class MainActivity extends AppCompatActivity {
                 if (password.isEmpty()) {
                     passwordEditText.setError("密码不能为空");
                 }
+
             } else {
                 // 登录逻辑
-                // 发送请求到服务器进行验证
-                // Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                // startActivity(intent);
-                // finish(); // 关闭当前登录界面
+                SharedPreferences prefs = getSharedPreferences("user_info", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("is_logged_in", true);
+                editor.apply();
+//                 跳转到主界面
+                    try {
+                        Intent intent = new Intent(MainActivity.this, User_Main.class);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        Log.d("denglu", "Error launching User_Main activity: " + e.getMessage());
+                    } finally {
+                        finish(); // 关闭当前登录界面
+                    }
+//                if (username.equals(user.getPhone().toString()) && password.equals(user.getPasswd())) {
+//                    // 登录成功，保存登录状态
+//                    SharedPreferences prefs = getSharedPreferences("user_info", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = prefs.edit();
+//                    editor.putBoolean("is_logged_in", true);
+//                    editor.apply();
+//
+//                    // 跳转到主界面
+//                    try {
+//                        Intent intent = new Intent(MainActivity.this, User_Main.class);
+//                        startActivity(intent);
+//                    } catch (Exception e) {
+//                        Log.d("denglu", "Error launching User_Main activity: " + e.getMessage());
+//                    } finally {
+//                        finish(); // 关闭当前登录界面
+//                    }
+//                } else {
+//                    Toast.makeText(this, "用户名或者密码错误,请重新输入", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
 
@@ -73,12 +108,23 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
-        // 立即注册按钮
-        registerButton.setOnClickListener(v ->{
-            // 跳转到注册界面
-            Intent intent = new Intent(MainActivity.this,RegisterActivity.class);
-            startActivity(intent);
 
+        // 立即注册按钮
+        registerButton.setOnClickListener(v -> {
+            // 跳转到注册界面
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
+    }
+
+    private void checkLoginStatus() {
+        SharedPreferences prefs = getSharedPreferences("user_info", MODE_PRIVATE);
+        boolean isLoggedIn = prefs.getBoolean("is_logged_in", false);
+
+        if (isLoggedIn) {
+            Intent intent = new Intent(MainActivity.this, User_Main.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

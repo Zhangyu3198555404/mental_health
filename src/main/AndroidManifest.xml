@@ -24,6 +24,17 @@
         <activity android:name=".RegisterActivity">
             <!-- 可以添加启动模式等属性 -->
         </activity>
+        <activity android:name=".Login.User_Main"/>
+        <activity android:name=".Login.UserInfoActivity"/>
+        <activity android:name=".Login.TreeHoleActivity"/>
+        <activity android:name=".Login.SmartChatActivity"/>
+        <activity android:name=".Login.TreeHole.PostTreeHoleActivity"/>
+        <activity android:name=".Login.PsychResourcesActivity"/>
+        <activity android:name=".Login.MessagesActivity"/>
+        <activity android:name=".Login.FriendsActivity"/>
+        <activity android:name=".Login.ShortVideosActivity"/>
+
+        <activity android:name=".Login.MoodRecordActivity"/>
     </application>
 
 </manifest>
