@@ -67,8 +67,8 @@ public class User_Main extends AppCompatActivity {
 //        });
 
         // 设置底部导航按钮点击事件
-        findViewById(R.id.nav_messages).setOnClickListener(v -> {  // 消息
-            Intent intent = new Intent(User_Main.this, MessagesActivity.class);
+        findViewById(R.id.return_user_main).setOnClickListener(v -> {  // 返回主界面
+            Intent intent = new Intent(User_Main.this, User_Main.class);
             startActivity(intent);
         });
 
@@ -108,10 +108,14 @@ public class User_Main extends AppCompatActivity {
         });
 
         // 跳转到心理资源页面
-        findViewById(R.id.slider_recycler).setOnClickListener(v->{
+//        findViewById(R.id.slider_recycler).setOnClickListener(v->{
+//            Intent intent = new Intent(User_Main.this, PsychResourcesActivity.class);
+//            startActivity(intent);
+//
+//        });
+        viewPager2.setOnClickListener(view -> {
             Intent intent = new Intent(User_Main.this, PsychResourcesActivity.class);
             startActivity(intent);
-
         });
 
     }

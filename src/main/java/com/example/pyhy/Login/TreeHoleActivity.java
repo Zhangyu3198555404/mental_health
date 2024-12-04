@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +22,7 @@ public class TreeHoleActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TreeHoleAdapter adapter;
     private List<TreeHole> treeHoleList = new ArrayList<>();
-    private Button postButton;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,7 @@ public class TreeHoleActivity extends AppCompatActivity {
         setContentView(R.layout.tree_hole);
 
         recyclerView = findViewById(R.id.recyclerView);
-        postButton = findViewById(R.id.postButton);
+        imageView = findViewById(R.id.addPostImageView);
 
         // 设置 RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -41,7 +43,7 @@ public class TreeHoleActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
         // 发布树洞按钮
-        postButton.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 启动发布树洞活动

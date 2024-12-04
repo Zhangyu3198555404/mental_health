@@ -6,6 +6,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pyhy.R;
@@ -47,15 +49,27 @@ public class UserInfoActivity extends AppCompatActivity {
         accountTextView.setText("账号: johndoe@gmail.com");
 
         // 设置个人简介和兴趣爱好（假设从数据库获取）
-        bioEditText.setText("这是用户的个人简介...");
-        interestsEditText.setText("兴趣: 旅游、编程、摄影");
+        Intent intent_des = getIntent();
+        String des_ = intent_des.getStringExtra("descript");
+
+        // 空值检查，避免空指针异常
+        if (des_ == null || des_.equals("")) {
+            bioEditText.setText("可以添加个人简介");
+        } else {
+            bioEditText.setText(des_);
+        }
+
+        // 假设兴趣爱好也是从数据库或其他地方获取
+        String interests = "旅游、编程、摄影";
+        interestsEditText.setText("兴趣: " + interests);
+
 
         // 设置树洞信息（假设动态加载数据）
         // 示例树洞内容
         setDohHoleContent();
         
-        findViewById(R.id.nav_messages).setOnClickListener(v -> {  // 消息
-            Intent intent = new Intent(UserInfoActivity.this, MessagesActivity.class);
+        findViewById(R.id.return_user_main).setOnClickListener(v -> {  //  返回主页
+            Intent intent = new Intent(UserInfoActivity.this, TreeHoleActivity.class);
             startActivity(intent);
         });
 
@@ -70,8 +84,7 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.nav_user_info).setOnClickListener(v -> { // 用户信息
-            Intent intent = new Intent(UserInfoActivity.this, UserInfoActivity.class);
-            startActivity(intent);
+            Toast.makeText(UserInfoActivity.this,"已经在了哦",Toast.LENGTH_SHORT).show();
         });
         
     }

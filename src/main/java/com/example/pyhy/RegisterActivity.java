@@ -11,6 +11,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.pyhy.Login.UserInfoActivity;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText usernameEditText, ageEditText, emailOrPhoneEditText, passwordEditText, descriptionEditText;
@@ -47,6 +49,10 @@ public class RegisterActivity extends AppCompatActivity {
             String password = passwordEditText.getText().toString().trim();
             String description = descriptionEditText.getText().toString().trim();
             User user = new User(); // 本地临时存储用户信息
+
+
+            // 获取个人简介
+            String descript = descriptionEditText.toString().trim();
 
             // 获取性别
             int selectedGenderId = genderRadioGroup.getCheckedRadioButtonId();
@@ -87,7 +93,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             // 注册成功后跳转到登录页面
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+            Intent intent_descript = new Intent(RegisterActivity.this, UserInfoActivity.class);
+            intent_descript.putExtra("descript",descript);
             startActivity(intent);
+            startActivity(intent_descript);
             finish();  // 关闭当前注册页面
         });
     }

@@ -14,12 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.pyhy.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CreateDiaryActivity extends Activity {
+public class CreateDiaryActivity extends AppCompatActivity {
 
     private EditText editTextDiary;
     private Button buttonSaveDiary, buttonSelectImage;

@@ -27,9 +27,13 @@ public class PsychResourcesActivity extends AppCompatActivity {
 
         // 创建一些示例资源
         resourcesList = new ArrayList<>();
+
         resourcesList.add("心理健康指南");
+
         resourcesList.add("压力管理技巧");
+
         resourcesList.add("焦虑症自我帮助");
+
         resourcesList.add("情绪调节方法");
 
         // 创建适配器并设置给 ListView

@@ -13,9 +13,9 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <!-- 消息 -->
+        <!-- 主界面返回 -->
         <LinearLayout
-            android:id="@+id/nav_messages"
+            android:id="@+id/return_user_main"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -27,7 +27,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:contentDescription="消息"
+                android:contentDescription="主页"
                 android:src="@drawable/user_news_png" />
 
             <TextView
